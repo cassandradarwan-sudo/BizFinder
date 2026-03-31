@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizFinder.ai | Fitness & Gyms AI Voice Assistant</title>
+    <meta name="description" content="Boost trial bookings by 150%. Our AI Fitness Assistant confirms member goals and locks in the first visit via voice—eliminating the drop-off of static links.">
+    
+    <!-- Modern Font: Inter and Oswald for a high-performance fitness feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #d9f99d; /* Neon Citron */
+            --primary-glow: rgba(217, 249, 157, 0.4);
+            --secondary: #84cc16; /* Lime Green */
+            --bg-dark: #0f172a; /* Deep Slate */
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #a855f7; /* Energy Purple */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(217, 249, 157, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .brand-logo {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            line-height: 0.8;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .logo-biz {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+
+        .logo-finder {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -1.5px;
+            margin-top: -2px;
+        }
+        
+        .logo-ai {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0;
+            margin-left: 1px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.22rem;
+            border-radius: 0; /* Boxy performance look */
+            text-decoration: none;
+            font-weight: 800;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 4px 25px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background: #e9ffc2;
+            box-shadow: 0 8px 35px var(--primary-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #000;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10rem 5% 5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 650px;
+            z-index: 10;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(217, 249, 157, 0.1);
+            color: var(--primary);
+            padding: 0.6rem 1.4rem;
+            border: 1px solid var(--primary-glow);
+            font-size: 0.85rem;
+            font-weight: 800;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero h1 {
+            font-size: 4.8rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 3.5rem;
+            max-width: 90%;
+            font-weight: 400;
+        }
+
+        /* Interactive CSS Widget */
+        .hero-graphics {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .mockup-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 4px;
+            background: #1e293b;
+            padding: 3rem;
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.9), 0 0 50px rgba(217, 249, 157, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            transform: perspective(1000px) rotateY(-8deg) rotateX(8deg);
+            transition: all 0.4s ease;
+        }
+
+        .mockup-container:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+            border-color: var(--primary-glow);
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse-aura 2s infinite;
+        }
+
+        @keyframes pulse-aura {
+            0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(217, 249, 157, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(217, 249, 157, 0); }
+            100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(217, 249, 157, 0); }
+        }
+
+        .intake-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .goal-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .goal-option {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .goal-option.active {
+            background: rgba(217, 249, 157, 0.05);
+            border-color: var(--primary);
+        }
+
+        .goal-label {
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .checkbox-sim {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .active .checkbox-sim {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .active .checkbox-sim::after {
+            content: '✔';
+            color: #000;
+            font-size: 0.8rem;
+        }
+
+        .confirmation-bar {
+            background: var(--secondary);
+            color: #000;
+            padding: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-top: 1rem;
+            animation: slide-up 1.5s ease-out;
+        }
+
+        @keyframes slide-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 10rem 5%;
+            background: rgba(15, 23, 42, 0.5);
+            text-align: center;
+        }
+
+        .problem-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 6rem;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4rem 2rem;
+            transition: all 0.3s;
+            text-align: center;
+            border-bottom: 4px solid transparent;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-15px);
+            border-bottom-color: var(--primary);
+            background: rgba(217, 249, 157, 0.03);
+        }
+
+        .problem-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .problem-card p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Features */
+        .features {
+            padding: 10rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            margin-bottom: 6rem;
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .feature-item:last-child { margin-bottom: 0; }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            flex-shrink: 0;
+            background: rgba(217, 249, 157, 0.05);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .feature-text h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-text p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 10rem 5%;
+            text-align: center;
+            background: linear-gradient(0deg, rgba(217, 249, 157, 0.05) 0%, transparent 100%);
+        }
+
+        .cta h2 {
+            font-size: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        footer {
+            padding: 5rem 5%;
+            text-align: center;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Animations */
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: perspective(1000px) rotateY(-8deg) rotateX(8deg) translateY(0px); }
+            50% { transform: perspective(1000px) rotateY(-8deg) rotateX(8deg) translateY(-20px); }
+            100% { transform: perspective(1000px) rotateY(-8deg) rotateX(8deg) translateY(0px); }
+        }
+
+        @media (max-width: 1024px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 8rem; }
+            .hero-content { margin-bottom: 6rem; }
+            .hero h1 { font-size: 3.5rem; }
+            .mockup-container { transform: none !important; margin: 0 auto; }
+            .floating { animation: float-mobile 6s ease-in-out infinite; }
+            @keyframes float-mobile {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-25px); }
+                100% { transform: translateY(0px); }
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="brand-logo">
+            <div class="logo-biz">Biz</div>
+            <div class="logo-finder">finder<span class="logo-ai">.ai</span></div>
+        </a>
+        <nav>
+            <a href="#demo" class="btn btn-outline" style="padding: 0.7rem 1.5rem; font-size: 0.9rem;">Gym Portal</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">Performance Training Systems</div>
+            <h1>Dynamic Bookings. <span>Bigger Membership.</span></h1>
+            <p>Ditch the static sign-up links. Deploy an AI Intake Counselor that locks in trial memberships through high-engagement voice conversations—boosting your show-up rate by over 150%.</p>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <a href="#demo" class="btn btn-primary">Scale My Gym</a>
+                <a href="#problem" class="btn btn-outline">See the Data</a>
+            </div>
+        </div>
+
+        <div class="hero-graphics">
+            <div class="mockup-container floating">
+                <div class="widget-header">
+                    <div class="pulse-dot"></div>
+                    <span class="intake-title">AI PERFORMANCE COUNSELOR</span>
+                </div>
+
+                <div class="goal-selection">
+                    <div class="goal-option">
+                        <span class="goal-label">Weight Management</span>
+                        <div class="checkbox-sim"></div>
+                    </div>
+                    <div class="goal-option active">
+                        <span class="goal-label">Functional Strength</span>
+                        <div class="checkbox-sim"></div>
+                    </div>
+                    <div class="goal-option">
+                        <span class="goal-label">Endurance / Cardio</span>
+                        <div class="checkbox-sim"></div>
+                    </div>
+                </div>
+
+                <div style="text-align: left; margin-bottom: 2rem;">
+                    <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Next Step: Lock-In Visit</div>
+                    <div style="color: #fff; font-weight: 800; font-size: 1.1rem;">"Great! Let's book your first session for Monday at 6 PM."</div>
+                </div>
+
+                <div class="confirmation-bar">
+                    MEMBER CONFIRMED: MONDAY 18:00
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section" id="problem">
+        <h2>Static Links are the Death of Trials</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3>The 80% Drop-Off</h3>
+                <p>Asking a motivated lead to fill out a silent form kills the energy. Most potential members drop off before ever hitting 'Submit'.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Ghosted Appointments</h3>
+                <p>Leads who book via static links have zero personal connection, leading to a 60% 'no-show' rate for their first trial visit.</p>
+            </div>
+            <div class="problem-card">
+                <h3>High Overhead</h3>
+                <p>Scaling a gym shouldn't require hiring a 24/7 call center. Let the AI handle the intake so your coaches can focus on training.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-item">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-text">
+                <h3>Goal-Oriented Conversion</h3>
+                <p>Our AI doesn't just 'book a time'. It investigates the prospective member's goals—weight loss, strength, or flexibility—to create an immediate mental commitment to the gym.</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">📅</div>
+            <div class="feature-text">
+                <h3>Instant First Visit Lock-In</h3>
+                <p>Directly integrates with Mindbody, Wodify, or Zen Planner to verbally offer open club slots and secure the booking on the spot.</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🔥</div>
+            <div class="feature-text">
+                <h3>150% Show-Up Boost</h3>
+                <p>By establishing a verbal rapport and confirming a plan, prospective members feel 150% more accountable to actually step through your doors.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="demo">
+        <div class="cta-inner">
+            <h2>Ready to Fill Your Gym floor?</h2>
+            <p>Stop leaving your growth to chance. Replace your links with a High-Performance AI Counselor today.</p>
+            <a href="mailto:sales@bizfinder.ai" class="btn btn-primary">Book My Site Demo</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 BizFinder.ai. High-Performance Infrastructure for Modern Fitness.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
