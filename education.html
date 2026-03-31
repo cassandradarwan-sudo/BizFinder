@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizFinder.ai | EdTech & Higher Education AI Voice Assistant</title>
+    <meta name="description" content="Capture global student leads 24/7. Our AI Admissions Counselor engages 3AM sign-ups immediately, booking enrollment interviews before they go cold.">
+    
+    <!-- Modern Font: Inter for clean UI, Poppins for a welcoming, educational feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0284c7; /* Cerulean Blue */
+            --primary-glow: rgba(2, 132, 199, 0.4);
+            --secondary: #eab308; /* Academic Yellow */
+            --bg-dark: #0f172a; /* Deep Slate */
+            --bg-card: rgba(15, 23, 42, 0.8);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(2, 132, 199, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(234, 179, 8, 0.08) 0%, transparent 50%);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.2;
+        }
+
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(2, 132, 199, 0.2);
+        }
+
+        .brand-logo {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            line-height: 0.8;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .logo-biz {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+
+        .logo-finder {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #3b82f6; /* Core logo blue */
+            letter-spacing: -1.5px;
+            margin-top: -2px;
+        }
+        
+        .logo-ai {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0;
+            margin-left: 1px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--primary-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.5);
+        }
+
+        .btn-outline:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: #38bdf8;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8rem 5% 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+            z-index: 10;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(2, 132, 199, 0.15);
+            border: 1px solid rgba(2, 132, 199, 0.3);
+            color: #7dd3fc;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #7dd3fc, #0284c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 90%;
+            font-weight: 400;
+        }
+
+        .hero-graphics {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .mockup-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 40px rgba(2, 132, 199, 0.25);
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+            border: 1px solid rgba(2, 132, 199, 0.3);
+        }
+
+        .mockup-container:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+
+        .mockup-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 6rem 5%;
+            background: rgba(15, 23, 42, 0.5);
+            border-top: 1px solid rgba(2, 132, 199, 0.1);
+            border-bottom: 1px solid rgba(2, 132, 199, 0.1);
+            text-align: center;
+        }
+
+        .problem-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-subtitle {
+            font-size: 1.2rem;
+            color: #ef4444;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-weight: 500;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2.5rem 2rem;
+            border-radius: 1rem;
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            border-top: 3px solid transparent;
+            text-align: left;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-top: 3px solid var(--primary);
+            background: rgba(2, 132, 199, 0.08);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .stat-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .stat-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Solution / Features Section */
+        .features {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .feature-icon-wrapper {
+            background: rgba(2, 132, 199, 0.1);
+            border: 1px solid rgba(2, 132, 199, 0.3);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #38bdf8;
+            font-size: 1.5rem;
+        }
+
+        .feature-text h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .feature-text p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 5%;
+            background: linear-gradient(180deg, transparent 0%, rgba(2, 132, 199, 0.08) 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.9));
+            border: 1px solid rgba(2, 132, 199, 0.4);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 0 40px rgba(2, 132, 199, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15), transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-box h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 8rem;
+                gap: 4rem;
+            }
+
+            .hero-content {
+                margin: 0 auto;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                margin: 0 auto 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+            .cta-box h2 {
+                font-size: 2.2rem;
+            }
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="brand-logo">
+            <div class="logo-biz">Biz</div>
+            <div class="logo-finder">finder<span class="logo-ai">.ai</span></div>
+        </a>
+        <nav>
+            <a href="#demo" class="btn btn-outline">University Log In</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">Education & EdTech</div>
+            <h1>Global Leads Fade Fast. <span>Enroll Them Instantly.</span></h1>
+            <p>Deploy a flawless AI Admissions Counselor that answers questions, evaluates prerequisites, and secures student enrollment calls at exactly the moment of high intent—even at 3AM.</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="#demo" class="btn btn-primary">Lock In Enrollments</a>
+                <a href="#features" class="btn btn-outline" style="background: rgba(255,255,255,0.05);">See Global Capabilities</a>
+            </div>
+            
+            <div style="margin-top: 2.5rem; display: flex; align-items: center; gap: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                <div style="display: flex;">
+                    <!-- Star SVGs -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--secondary)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--secondary)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--secondary)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--secondary)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--secondary)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                Trusted by Top Universities & Online Academies
+            </div>
+        </div>
+        
+        <div class="hero-graphics">
+            <div class="mockup-container floating">
+                <!-- Using the pre-existing high quality AI widget mockup since generation quota is met -->
+                <img src="assets/widget-mockup.png" alt="BizFinder AI Education Voice Assistant Interface">
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section" id="problem">
+        <h2>The Cost of Delayed Admissions</h2>
+        <p class="problem-subtitle">In the highly competitive e-learning and higher education space, asynchronous communication leads to disastrous drop-off rates.</p>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🌙</div>
+                <h3>The 3AM Phenomenon</h3>
+                <p>Global student leads researching courses late at night are highly motivated. A delayed email response by morning means they've already moved on.</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌍</div>
+                <h3>Time Zone Bottlenecks</h3>
+                <p>Limited operational hours cripple international student recruitment. Admissions counselors simply cannot scale to cover 24 time zones.</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📉</div>
+                <h3>Dormant Sign-Ups</h3>
+                <p>Without immediate verbal validation and syllabus clarification, passive form submissions almost never convert into tuition-paying students.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>The Always-On University</h2>
+            <p>Replace static brochures with a conversational admissions expert that walks prospective students through their academic future—no matter where they are.</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="feature-icon-wrapper">
+                    <!-- Globe icon -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>24/7 Global Engagement</h3>
+                    <p>Fires off immediate voice engagements to inbound leads instantly upon form submission, bridging the time zone gap for international applicants.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-wrapper">
+                    <!-- Book icon -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Curriculum & Syllabus Parsing</h3>
+                    <p>Ingests entire course catalogues and answers granular questions about credits, prerequisites, required software, and expected career outcomes.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-wrapper">
+                    <!-- Phone forward icon -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path><line x1="14" y1="9" x2="22" y2="9"></line><polyline points="18 5 22 9 18 13"></polyline></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Immediate Enrollment Calls</h3>
+                    <p>Qualifies the student's background, assesses financial aid requirements, and immediately schedules a finalized enrollment interview with the faculty.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-wrapper">
+                    <!-- Heartbeat/Retain icon -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Proactive Drop-Out Prevention</h3>
+                    <p>Places automated, empathetic wellness checks to enrolled students struggling with attendance to boost campus retention metrics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="demo">
+        <div class="cta-box">
+            <h2>Ready to Maximize Global Enrollment?</h2>
+            <p>Ensure no tuition-paying student falls through the cracks due to a delayed response. Schedule an architectural review of our AI systems today.</p>
+            <div class="cta-group">
+                <a href="mailto:sales@bizfinder.ai" class="btn btn-primary">Book Admissions Demo</a>
+                <a href="#features" class="btn btn-outline" style="background: rgba(255,255,255,0.05);">View Case Studies</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 BizFinder.ai. Scalable AI Solutions for Higher Learning.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
