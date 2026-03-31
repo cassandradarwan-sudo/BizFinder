@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizFinder Home Services AI | 24/7 Emergency Dispatch</title>
+    
+    <!-- Modern Font for Trust & Reliability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a; /* Deep tech navy */
+            --bg-grad-1: #1e293b;
+            --bg-grad-2: #020617;
+            --accent-primary: #f97316; /* Electric Orange for Urgency */
+            --accent-primary-hover: #ea580c;
+            --accent-glow: #fdba74;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            --glass-bg: rgba(15, 23, 42, 0.7);
+            --glass-border: rgba(249, 115, 22, 0.2);
+            --emergency-red: #ef4444;
+            --success-green: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), var(--bg-grad-1), var(--bg-grad-2));
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Hero Background Overlay */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: radial-gradient(circle at top right, rgba(249, 115, 22, 0.15), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.15), transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--accent-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: calc(100vh - 120px);
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1.2;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .problem-statement {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--emergency-red);
+            background: rgba(239, 68, 68, 0.1);
+            padding: 0.5rem 1.25rem;
+            border-radius: 99px;
+            margin-bottom: 1.75rem;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            gap: 0.5rem;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+        }
+
+        .alert-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emergency-red);
+            border-radius: 50%;
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .hero-title {
+            font-size: 4.25rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .hero-title span {
+            color: var(--accent-primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title span::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 8px;
+            width: 100%;
+            height: 8px;
+            background: var(--accent-primary);
+            opacity: 0.3;
+            z-index: -1;
+            transform: skewX(-15deg);
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            font-weight: 400;
+            max-width: 95%;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: #fff;
+            padding: 1.1rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.4);
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-primary-hover);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px -5px rgba(249, 115, 22, 0.5);
+        }
+
+        .demo-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            backdrop-filter: blur(10px);
+        }
+
+        .demo-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .pulse-icon {
+            color: var(--success-green);
+        }
+
+        /* Hero Visual Section */
+        .hero-visual {
+            flex: 0.9;
+            position: relative;
+            animation: fadeIn 1.2s 0.4s ease forwards;
+            opacity: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 
+                        inset 0 1px 1px rgba(255,255,255,0.1);
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.5s ease;
+        }
+
+        .glass-card:hover {
+            transform: perspective(1000px) rotateY(0deg) translateY(-10px);
+        }
+
+        .glass-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            display: block;
+        }
+
+        /* Call Status UI Floating element */
+        .floating-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -40px;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-badge .icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--success-green);
+            font-size: 1.25rem;
+        }
+
+        .floating-badge .content strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .floating-badge .content span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 7rem 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: var(--text-main);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(to bottom right, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1.25rem;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(249, 115, 22, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                        0 0 30px rgba(249, 115, 22, 0.1);
+        }
+
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: rgba(249, 115, 22, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(249, 115, 22, 0.2);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .feature-text {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes ping {
+            75%, 100% { transform: scale(2); opacity: 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 3.5rem; }
+            .hero { gap: 2rem; }
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 2rem;
+            }
+            .hero-content { flex: none; width: 100%; }
+            .problem-statement { margin: 0 auto 1.5rem; }
+            .hero-title span::after { bottom: 4px; height: 6px; }
+            .hero-description { margin: 0 auto 2.5rem auto; }
+            .cta-container { justify-content: center; flex-direction: column; }
+            .btn-primary, .demo-btn { width: 100%; justify-content: center; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .hero-visual { justify-content: center; margin-top: 3rem; width: 100%; }
+            .glass-card { transform: none; }
+            .floating-badge { left: 50%; transform: translateX(-50%); bottom: -40px; }
+            @keyframes float {
+                0% { transform: translateX(-50%) translateY(0px); }
+                50% { transform: translateX(-50%) translateY(-10px); }
+                100% { transform: translateX(-50%) translateY(0px); }
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-bg"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">BizFinder <span>Home Services AI</span></div>
+        </header>
+
+        <main class="hero">
+            <div class="hero-content">
+                <div class="problem-statement">
+                    <div class="alert-dot"></div>
+                    Missed calls = Lost Emergency Jobs
+                </div>
+                <h1 class="hero-title">Home emergencies <span>don't wait</span> for business hours.</h1>
+                <p class="hero-description">
+                    Equip your business (HVAC, Plumbing, Electrical) with an AI Voice Assistant built for the trades. Stop losing critical jobs to the competition. Our AI answers instantly 24/7, filters out spam, captures emergency details, and routes qualified leads straight to your technicians.
+                </p>
+                <div class="cta-container">
+                    <button class="btn-primary" onclick="alert('Starting Trial Setup...')">
+                        Deploy Your Assistant
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                    <button class="demo-btn" onclick="alert('Playing AI Voice Mockup...')">
+                        <span class="pulse-icon">●</span> Hear It Answer "HVAC Outage"
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="glass-card">
+                    <!-- Placeholder graphic for AI Voice interface for contractors -->
+                    <img src="assets/homeservice-voice-ui.png" alt="AI Home Services UI" onerror="this.src='https://placehold.co/400x520/1e293b/f97316?text=AI+Dispatch+App'">
+                    
+                    <div class="floating-badge">
+                        <div class="icon">✓</div>
+                        <div class="content">
+                            <strong>Emergency Dispatched</strong>
+                            <span>"Burst pipe at 123 Main St"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <section class="features">
+            <h2 class="section-title">Built For The Trades</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon-wrapper">🚫</div>
+                    <h3 class="feature-title">Smart Spam Filtering</h3>
+                    <p class="feature-text">Stop wasting your dispatchers' time with robo-calls and tire-kickers. The AI qualifies the caller's intent before ever alerting your team.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper">📝</div>
+                    <h3 class="feature-title">Urgent Job Capture</h3>
+                    <p class="feature-text">Collects essential details automatically—name, address, issue severity, and contact info, packaging it neatly into a service ticket.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper">⚡</div>
+                    <h3 class="feature-title">Instant Dispatch Routing</h3>
+                    <p class="feature-text">Immediately SMS alerts your on-call technicians or field managers for true emergencies, ensuring you're the first to respond.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
