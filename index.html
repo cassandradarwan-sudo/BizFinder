@@ -3,152 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BizFinder - All business inquiries handled here">
-    <title>BizFinder | Submit Inquiry</title>
+    <title>RealEstate AI | Never Miss a Call</title>
     
-    <!-- Modern Font: Inter -->
+    <!-- Modern Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #4F46E5;
-            --primary-hover: #4338CA;
-            --bg-gradient-start: #EEF2FF;
-            --bg-gradient-end: #C7D2FE;
-            --text-main: #111827;
-            --text-muted: #4B5563;
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --bg-color: #0f0c29;
+            --bg-grad-1: #302b63;
+            --bg-grad-2: #24243e;
+            --accent-primary: #4F46E5;
+            --accent-glow: #ec4899;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Outfit', sans-serif;
         }
 
         body {
-            /* Full viewport height to ensure centering vertically */
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-            /* Clean, modern gradient background */
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
-            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--bg-color), var(--bg-grad-1), var(--bg-grad-2));
             color: var(--text-main);
-            /* Smooth background animation if needed */
-            background-size: 200% 200%;
-            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Hero Background Overlay */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('assets/hero-bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            z-index: -1;
+            mix-blend-mode: screen;
         }
 
-        .card-container {
-            /* Rounded card layout with glassmorphism effect */
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 1.5rem;
-            padding: 3rem 2.5rem;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            
-            /* Entry animation */
-            opacity: 0;
-            transform: translateY(20px);
-            animation: cardAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        @keyframes cardAppear {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
         }
 
-        h1 {
-            font-size: 2.75rem;
+        .logo {
+            font-size: 1.5rem;
             font-weight: 800;
-            margin-bottom: 0.5rem;
-            /* Gradient Text for wow-factor */
+            letter-spacing: -0.05em;
             background: linear-gradient(to right, #4F46E5, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.025em;
         }
 
-        h2 {
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: calc(100vh - 100px);
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            color: var(--accent-glow);
+            text-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+        }
+
+        .problem-statement {
             font-size: 1.25rem;
+            color: #fca5a5; /* slight red tint for problem */
+            margin-bottom: 1rem;
             font-weight: 600;
-            margin-bottom: 1.25rem;
-            color: var(--text-muted);
         }
 
-        p {
-            font-size: 1rem;
-            line-height: 1.6;
+        .hero-description {
+            font-size: 1.25rem;
             color: var(--text-muted);
             margin-bottom: 2.5rem;
+            line-height: 1.6;
         }
 
-        .cta-button {
-            display: inline-block;
-            background-color: var(--primary);
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), #6366f1);
             color: white;
-            padding: 1.125rem 2.5rem;
-            border-radius: 9999px;
+            padding: 1rem 2.5rem;
+            border-radius: 99px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.125rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3), 0 2px 4px -1px rgba(79, 70, 229, 0.2);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.5);
         }
 
-        .cta-button:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4), 0 4px 6px -2px rgba(79, 70, 229, 0.2);
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -5px rgba(79, 70, 229, 0.7);
         }
 
-        .cta-button:active {
-            transform: translateY(1px);
+        .demo-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            padding: 1rem 2rem;
+            border-radius: 99px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
         }
 
-        /* Mobile responsiveness adjustments */
-        @media (max-width: 480px) {
-            .card-container {
-                padding: 2.5rem 1.5rem;
+        .demo-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Pulse Animation for demo button */
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #ec4899;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(236, 72, 153, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0); }
+        }
+
+        /* Hero Image/UI Mockup Section */
+        .hero-visual {
+            flex: 1;
+            position: relative;
+            animation: fadeIn 1s 0.5s ease forwards;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .glass-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            display: block;
+        }
+
+        /* Decorative glowing orbs behind the card */
+        .glow-orb-1 {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 150px;
+            height: 150px;
+            background: var(--accent-glow);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .glow-orb-2 {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            width: 150px;
+            height: 150px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(79, 70, 229, 0.5);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .feature-text {
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 2rem;
             }
-            h1 {
-                font-size: 2.25rem;
-            }
-            h2 {
-                font-size: 1.125rem;
-            }
-            p {
-                font-size: 0.95rem;
-            }
+            .hero-title { font-size: 3rem; }
+            .cta-container { justify-content: center; flex-wrap: wrap; }
+            .feature-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="card-container">
-        <h1>BizFinder</h1>
-        <h2>All business inquiries handled here</h2>
-        <p>Connecting businesses with the right solutions. Click below to submit your business inquiry and our team will be in touch with you shortly to help streamline your operations.</p>
-        <a href="https://www.bizfinder.ai" class="cta-button">Submit Inquiry</a>
+    <div class="hero-bg"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">BizFinder VoiceAI</div>
+        </header>
+
+        <main class="hero">
+            <div class="hero-content">
+                <div class="problem-statement">Missed calls = Lost Commissions</div>
+                <h1 class="hero-title">Stop losing buyers to <span>after-hours voicemail</span>.</h1>
+                <p class="hero-description">
+                    Empower your real estate business with an AI Voice Assistant that answers calls 24/7, answers property questions instantly, and automatically books showings straight to your calendar.
+                </p>
+                <div class="cta-container">
+                    <button class="btn-primary" onclick="alert('Proceeding to Demo Booking...')">Get Early Access</button>
+                    <button class="demo-btn" onclick="alert('Playing AI Voice Mockup...')">
+                        <div class="pulse-dot"></div>
+                        Listen to Demo
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="glow-orb-1"></div>
+                <div class="glow-orb-2"></div>
+                <div class="glass-card">
+                    <!-- The generated UI mockup image goes here -->
+                    <img src="assets/voice-ui.png" alt="AI Voice Assistant Interface" onerror="this.src='https://placehold.co/400x500/100021/4F46E5?text=AI+Voice+Interface'">
+                </div>
+            </div>
+        </main>
+
+        <section class="features">
+            <h2 class="section-title">Why Top Brokers Choose Us</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <h3 class="feature-title">24/7 Availability</h3>
+                    <p class="feature-text">Never miss a call again. Our AI answers instantly, providing a human-like conversational experience even at 2 AM.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <h3 class="feature-title">Property Info on Demand</h3>
+                    <p class="feature-text">The AI pulls from your active listings to answer questions about price, square footage, HOAs, and neighborhood details.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3 class="feature-title">Automated Booking</h3>
+                    <p class="feature-text">Qualified leads can book a showing directly through the AI, which syncs perfectly with your Calendly or Google Calendar.</p>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 </html>
