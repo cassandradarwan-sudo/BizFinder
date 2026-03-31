@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizFinder.ai | Finance & Insurance AI Voice Assistant</title>
+    <meta name="description" content="Stop high-intent leads from dropping off. Our AI Financial Voice Assistant qualifies interest, bypasses long forms, and securely collects consultation fees 24/7.">
+    
+    <!-- Modern Font: Inter for clean UI, Merriweather for a classic, trustworthy financial feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #059669; /* Trustworthy Emerald Green */
+            --primary-glow: rgba(5, 150, 105, 0.4);
+            --secondary: #10b981; /* Lighter Emerald */
+            --bg-dark: #0f172a; /* Deep Slate */
+            --bg-card: rgba(30, 41, 59, 0.8);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(5, 150, 105, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.15) 0%, transparent 50%);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            line-height: 1.3;
+        }
+
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(5, 150, 105, 0.2);
+        }
+
+        .brand-logo {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            line-height: 0.8;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .logo-biz {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+
+        .logo-finder {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #3b82f6;
+            letter-spacing: -1.5px;
+            margin-top: -2px;
+        }
+        
+        .logo-ai {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0;
+            margin-left: 1px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--primary-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.5);
+        }
+
+        .btn-outline:hover {
+            background: rgba(52, 211, 153, 0.1);
+            border-color: #34d399;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8rem 5% 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+            z-index: 10;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(5, 150, 105, 0.15);
+            border: 1px solid rgba(5, 150, 105, 0.4);
+            color: #6ee7b7;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #a7f3d0, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 90%;
+            font-weight: 400;
+        }
+
+        .hero-graphics {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .mockup-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 40px rgba(5, 150, 105, 0.25);
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+            border: 1px solid rgba(5, 150, 105, 0.3);
+        }
+
+        .mockup-container:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+
+        .mockup-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 6rem 5%;
+            background: rgba(15, 23, 42, 0.6);
+            border-top: 1px solid rgba(5, 150, 105, 0.1);
+            border-bottom: 1px solid rgba(5, 150, 105, 0.1);
+            text-align: center;
+        }
+
+        .problem-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-subtitle {
+            font-size: 1.2rem;
+            color: #f87171;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-weight: 500;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2.5rem 2rem;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            border-top: 3px solid transparent;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-top: 3px solid #10b981;
+            background: rgba(5, 150, 105, 0.08);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .stat-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Merriweather', serif;
+        }
+
+        .stat-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Solution / Features Section */
+        .features {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .feature-icon-wrapper {
+            background: rgba(5, 150, 105, 0.1);
+            border: 1px solid rgba(5, 150, 105, 0.4);
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #34d399;
+            font-size: 1.5rem;
+        }
+
+        .feature-text h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            font-family: 'Merriweather', serif;
+        }
+
+        .feature-text p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 5%;
+            background: linear-gradient(180deg, transparent 0%, rgba(5, 150, 105, 0.08) 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(5, 150, 105, 0.4);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 0 40px rgba(5, 150, 105, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% -20%, rgba(16, 185, 129, 0.15), transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 8rem;
+                gap: 4rem;
+            }
+
+            .hero-content {
+                margin: 0 auto;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                margin: 0 auto 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            .cta-box h2 {
+                font-size: 2rem;
+            }
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="brand-logo">
+            <div class="logo-biz">Biz</div>
+            <div class="logo-finder">finder<span class="logo-ai">.ai</span></div>
+        </a>
+        <nav>
+            <a href="#demo" class="btn btn-outline">Client Access</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">Finance & Wealth Management</div>
+            <h1>High-Intent Leads Hate Long Forms. <span>Convert Them Instantly.</span></h1>
+            <p>Your secure, ultra-professional AI Financial Voice Assistant. Captures leads effortlessly, qualifies financial interest verbally, and securely collects consultation deposits—all in a natural conversation.</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="#demo" class="btn btn-primary">Secure Greater Assets</a>
+                <a href="#features" class="btn btn-outline" style="background: rgba(255,255,255,0.05);">View Compliance Specs</a>
+            </div>
+            
+            <div style="margin-top: 2.5rem; display: flex; align-items: center; gap: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                <div style="display: flex;">
+                    <!-- Star SVGs -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#10b981"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#10b981"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#10b981"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#10b981"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#10b981"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                Trusted by Top Advisory Firms & Agencies
+            </div>
+        </div>
+        
+        <div class="hero-graphics">
+            <div class="mockup-container floating">
+                <img src="assets/finance-widget-mockup.png" alt="BizFinder AI Financial Voice Assistant Interface">
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section" id="problem">
+        <h2>The Friction Costing You AUM</h2>
+        <p class="problem-subtitle">In the finance industry, requiring potential clients to fill out a 15-field lead intake form directly kills conversions and hands prospects to competitors.</p>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📄</div>
+                <h3>The Form Drop-Off</h3>
+                <p>Over 80% of high-net-worth prospects abandon lengthy qualification forms when seeking financial advice or insurance quotes.</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💳</div>
+                <h3>Payment Friction</h3>
+                <p>Failing to collect a consultation fee or deposit upfront results in severe no-show rates for busy financial advisors.</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⏳</div>
+                <h3>Delayed Qualification</h3>
+                <p>Waiting days to review a lead's portfolio size or risk tolerance means premium prospects lose interest before the first meeting.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Frictionless Lead Acquisition</h2>
+            <p>Replace tedious forms with a compliant, intelligent conversational agent that secures interest and processes payments instantly.</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="feature-icon-wrapper">
+                    <!-- Mic icon -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Conversational Qualification</h3>
+                    <p>Qualifies leads verbally. Gently inquiries about investable assets, insurance needs, or immediate financial objectives in a human-like flow.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-wrapper">
+                    <!-- Lock icon -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Secure Payment Collection</h3>
+                    <p>PCI-compliant voice integrations smoothly collect credit cards for consultation fees or initial policy deposits over the phone.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-wrapper">
+                    <!-- User check icon -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>High-Intent Routing</h3>
+                    <p>Instantly transfers highly qualified leads—like high-net-worth individuals or direct enterprise inquiries—directly to a senior advisor's cell phone.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-wrapper">
+                    <!-- Check shield icon -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Enterprise Security Standard</h3>
+                    <p>SOC2 and ISO certified infrastructure ensuring that personally identifiable financial background data is never compromised.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="demo">
+        <div class="cta-box">
+            <h2>Ready to Modernize Your Firm?</h2>
+            <p>Stop losing premium prospects to cumbersome intake processes. Book a confidential consultation today.</p>
+            <div class="cta-group">
+                <a href="mailto:sales@bizfinder.ai" class="btn btn-primary">Schedule Advisory Demo</a>
+                <a href="#features" class="btn btn-outline" style="background: rgba(255,255,255,0.05);">Review API Docs</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 BizFinder.ai. Next-Gen Infrastructure for Financial Services.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
