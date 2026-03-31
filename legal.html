@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizFinder Legal AI | 24/7 Intake & Conflict Checks</title>
+    
+    <!-- Modern Font for Legal Authority -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #020617; /* Very deep navy/slate */
+            --bg-grad-1: #0f172a;
+            --bg-grad-2: #1e293b;
+            --accent-gold: #fbbf24;
+            --accent-gold-hover: #d97706;
+            --accent-glow: #fcd34d;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(15, 23, 42, 0.65);
+            --glass-border: rgba(251, 191, 36, 0.15); /* Subtle gold border */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), var(--bg-grad-1), var(--bg-grad-2));
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Hero Background Overlay */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('assets/legal-hero-bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            z-index: -1;
+            mix-blend-mode: color-dodge;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 0;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: calc(100vh - 120px);
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1.2;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .problem-statement {
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ef4444; /* Alert red */
+            background: rgba(239, 68, 68, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .hero-title span {
+            color: var(--accent-gold);
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            font-weight: 300;
+            max-width: 90%;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-hover));
+            color: #020617; /* Dark text on gold */
+            padding: 1.1rem 2.5rem;
+            border-radius: 4px; /* More formal, less rounded for legal */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -5px rgba(251, 191, 36, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -5px rgba(251, 191, 36, 0.5);
+        }
+
+        .demo-btn {
+            background: transparent;
+            color: var(--text-main);
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+
+        .demo-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-gold);
+        }
+
+        /* Pulse Animation for demo button */
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent-glow);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(252, 211, 77, 0.6); }
+            70% { box-shadow: 0 0 0 10px rgba(252, 211, 77, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(252, 211, 77, 0); }
+        }
+
+        /* Hero Visual Section */
+        .hero-visual {
+            flex: 0.8;
+            position: relative;
+            animation: fadeIn 1.2s 0.4s ease forwards;
+            opacity: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem; /* Still slight rounding for modern UI */
+            padding: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .glass-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            display: block;
+        }
+
+        /* Decorative glowing orbs behind the card */
+        .glow-orb-1 {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 200px;
+            height: 200px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        .glow-orb-2 {
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 200px;
+            height: 200px;
+            background: #3b82f6; /* Trust blue */
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: linear-gradient(180deg, transparent, #020617);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: var(--text-main);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 3rem 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(15, 23, 42, 0.8);
+            border-color: var(--glass-border);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-gold);
+        }
+
+        .feature-title {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .feature-text {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1.05rem;
+            font-weight: 300;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 3.5rem; }
+            .hero { gap: 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 2rem;
+            }
+            .hero-content { flex: none; width: 100%; }
+            .hero-description { margin: 0 auto 2.5rem auto; }
+            .cta-container { justify-content: center; flex-direction: column; }
+            .btn-primary, .demo-btn { width: 100%; justify-content: center; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .hero-visual { justify-content: center; margin-top: 3rem; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-bg"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">BizFinder <span>Legal AI</span></div>
+        </header>
+
+        <main class="hero">
+            <div class="hero-content">
+                <div class="problem-statement">Missing Calls = Missing Retainers</div>
+                <h1 class="hero-title">Clients call the <span>next firm</span> if you don't answer.</h1>
+                <p class="hero-description">
+                    Empower your law firm with an AI Voice Assistant built for legal intake. It answers calls 24/7, handles initial client screening, runs automated conflict checks, and books consultations instantly.
+                </p>
+                <div class="cta-container">
+                    <button class="btn-primary" onclick="alert('Proceeding to Firm Verification...')">Request Firm Demo</button>
+                    <button class="demo-btn" onclick="alert('Playing AI Voice Mockup...')">
+                        <div class="pulse-dot"></div>
+                        Hear It In Action
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="glow-orb-1"></div>
+                <div class="glow-orb-2"></div>
+                <div class="glass-card">
+                    <!-- Custom AI Legal UI goes here -->
+                    <img src="assets/legal-voice-ui.png" alt="AI Legal Voice Intake Interface" onerror="this.src='https://placehold.co/400x500/0f172a/fbbf24?text=Legal+AI+Intake'">
+                </div>
+            </div>
+        </main>
+
+        <section class="features">
+            <h2 class="section-title">Automate Your Legal Intake</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚖️</div>
+                    <h3 class="feature-title">Instant Intake</h3>
+                    <p class="feature-text">Collect vital case information seamlessly over the phone, summarizing the facts before you ever speak to the client.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Conflict Checks</h3>
+                    <p class="feature-text">Our AI instantly cross-references names against your firm's database to flag potential conflicts of interest immediately.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗓️</div>
+                    <h3 class="feature-title">Consultation Booking</h3>
+                    <p class="feature-text">Convert high-value prospects on the spot. Allow qualified callers to schedule a paid or free consultation straight to your firm's calendar.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
