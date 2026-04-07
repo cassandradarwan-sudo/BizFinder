@@ -1,0 +1,31 @@
+# Standard Strapi + Next.js .gitignore
+
+# Dependencies
+node_modules/
+dist/
+build/
+.next/
+out/
+
+# Env vars
+.env
+.env.*
+!.env.example
+
+# Strapi internal
+.tmp/
+.strapi/
+public/uploads/
+data.db
+*.db
+
+# Temporary / OS
+.DS_Store
+Thumbs.db
+.brain/
+*.log
+
+# Cursor / Agent stuff
+.agents/
+.antigravity/
+.gemini/

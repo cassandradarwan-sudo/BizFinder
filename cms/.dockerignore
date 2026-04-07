@@ -1,0 +1,17 @@
+.tmp/
+.cache/
+.strapi/
+build/
+node_modules/
+public/uploads/
+.env
+.git/
+.gitignore
+frontend/
+Dockerfile
+cloudbuild.yaml
+README.md
+vendor/
+docker-compose.yml
+sqlite.db
+.DS_Store

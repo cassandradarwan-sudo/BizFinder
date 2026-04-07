@@ -1,0 +1,39 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '$_LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPOSITORY/$_SERVICE_NAME:$COMMIT_SHA', '.']
+
+  # Push the container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '$_LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPOSITORY/$_SERVICE_NAME:$COMMIT_SHA']
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - '$_SERVICE_NAME'
+      - '--image'
+      - '$_LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPOSITORY/$_SERVICE_NAME:$COMMIT_SHA'
+      - '--region'
+      - '$_LOCATION'
+      - '--platform'
+      - 'managed'
+      - '--port'
+      - '1337'
+      - '--allow-unauthenticated'
+      # Example of environment variables (should be moved to Secret Manager for real production)
+      - '--set-env-vars'
+      - 'STRAPI_URL=https://$_SERVICE_NAME-your-unique-hash.a.run.app,DATABASE_HOST=your-db-host,DATABASE_NAME=your-db-name,PROJECT_ID=$PROJECT_ID'
+
+images:
+  - '$_LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPOSITORY/$_SERVICE_NAME:$COMMIT_SHA'
+
+substitutions:
+  _LOCATION: us-central1
+  _REPOSITORY: strapi-repo
+  _SERVICE_NAME: strapi-backend
+
+options:
+  logging: CLOUD_LOGGING_ONLY
